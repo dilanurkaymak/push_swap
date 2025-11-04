@@ -35,5 +35,6 @@ typedef struct s_stack
 
 void	parse_args(t_stack *a, int argc, char **argv);
 
-
+int		ft_isnum(char *str);
+long	ft_atol(const char *str);
 #endif
