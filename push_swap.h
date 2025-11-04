@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 # include "libft/libft.h"
 
 typedef struct s_node
@@ -31,5 +32,8 @@ typedef struct s_stack
 	t_node	*top;
 	int		size;
 }	t_stack;
+
+void	parse_args(t_stack *a, int argc, char **argv);
+
 
 #endif
