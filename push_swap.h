@@ -37,4 +37,8 @@ void	parse_args(t_stack *a, int argc, char **argv);
 
 int		ft_isnum(char *str);
 long	ft_atol(const char *str);
+
+int		has_duplicates(t_stack *a);
+void	print_error(void);
+
 #endif
