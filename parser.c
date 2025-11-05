@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static  void fee_split(char **arr)
+static  oid fee_split(char **arr)
 {
 	int i;
 
