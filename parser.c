@@ -21,3 +21,10 @@ static  void fee_split(char **arr)
 		free(arr[i++]);
 	free(arr);
 }
+
+static	void add_number(t_stack *a, int nb)
+{
+	t_node *new;
+
+	new = malloc(sizeof(t_node));
+}
