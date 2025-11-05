@@ -24,7 +24,7 @@ static  void fee_split(char **arr)
 
 static	void add_number(t_stack *a, int nb)
 {
-	
+	t_node *new;
 
 	new = malloc(sizeof(t_node));
 }
