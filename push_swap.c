@@ -7,7 +7,7 @@ int main (void)
     t_stack a;
     t_stack b;
 
-    a.top = NULL;
+   
     a.size = 0;
     b.top = NULL;
     b.size = 0;
