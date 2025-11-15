@@ -10,7 +10,5 @@ int main (void)
     a.top = NULL;
     a.size = 0;
     b.top = NULL;
-    b.size = 0;
 
-    return 0;
 }
