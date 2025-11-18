@@ -22,23 +22,34 @@ typedef struct s_node
 {
 	int				value;
 	int				index;
-	int				cost_a;
-	int				cost_b;
 	struct s_node	*next;
 }	t_node;
 
-typedef struct s_stack
-{
-	t_node	*top;
-	int		size;
-}	t_stack;
+t_node	*parse_args(int argc, char **argv);
+t_node *node_new(int value);
 
-void	parse_args(t_stack *a, int argc, char **argv);
+void	add_back(t_node **stack, int value);
 
-int		ft_isnum(char *str);
-long	ft_atol(const char *str);
+int		list_size(t_node *stack);
 
-int		has_duplicates(t_stack *a);
-void	print_error(void);
+void	free_list(t_node **stack);
+int		max_bit(t_node *stack);
+
+/* ops.c */
+void	sa(t_node **a);
+void	pb(t_node **a, t_node **b);
+void	pa(t_node **a, t_node **b);
+void	ra(t_node **a);
+void	rra(t_node **a);
+
+/* sort_radix.c */
+void	assign_index(t_node *a);
+void	radix_sort(t_node **a, t_node **b);
+
+/* sort_small.c */
+void	sort_small(t_node **a, t_node **b);
+
+/* utils */
+int		is_sorted(t_node *a);
 
 #endif
