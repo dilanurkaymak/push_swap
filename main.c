@@ -13,4 +13,18 @@ int main(int argc, char **argv)
         write(2,"Error\n",6);
         return(1);
     }
+
+    if(!is_sorted(a))
+    {
+        if(list_size(a) <= 7)
+            sort_small(%a, &b);
+        else
+        {
+            assign_index(a);
+            radix_sort(&a, &b);
+        }
+    }
+    free_list(&a);
+
+    return (0);
 }
