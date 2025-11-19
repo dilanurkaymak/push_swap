@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 
     if(!is_sorted(a))
     {
-        if(list_size(a) <= 7)
+        if(ft_lstsize(a) <= 7)
             sort_small(%a, &b);
         else
         {
@@ -24,7 +24,6 @@ int main(int argc, char **argv)
             radix_sort(&a, &b);
         }
     }
-    free_list(&a);
-
+    ft_lstclear(&a);
     return (0);
 }

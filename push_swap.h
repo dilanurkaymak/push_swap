@@ -18,38 +18,27 @@
 # include <limits.h>
 # include "libft/libft.h"
 
-typedef struct s_node
+typedef struct s_data
 {
 	int				value;
 	int				index;
-	struct s_node	*next;
-}	t_node;
+}	t_data;
 
-t_node	*parse_args(int argc, char **argv);
-t_node *node_new(int value);
+t_list	*parse_args(int argc, char **argv);
 
-void	add_back(t_node **stack, int value);
+int		is_sorted(t_list *stack);
+int		has_duplicates(int *arr, int size);
+int		get_max_bits(t_list *stack);
 
-int		list_size(t_node *stack);
+void	sa(t_list **a);
+void	pb(t_list **a, t_list **b);
+void	pa(t_list **a, t_list **b);
+void	ra(t_list **a);
+void	rra(t_list **a);
 
-void	free_list(t_node **stack);
-int		max_bit(t_node *stack);
+void	sort_small(t_list **a, t_list **b);
 
-/* ops.c */
-void	sa(t_node **a);
-void	pb(t_node **a, t_node **b);
-void	pa(t_node **a, t_node **b);
-void	ra(t_node **a);
-void	rra(t_node **a);
-
-/* sort_radix.c */
-void	assign_index(t_node *a);
-void	radix_sort(t_node **a, t_node **b);
-
-/* sort_small.c */
-void	sort_small(t_node **a, t_node **b);
-
-/* utils */
-int		is_sorted(t_node *a);
+void	assign_index(t_list *a);
+void	radix_sort(t_list **a, t_list **b);
 
 #endif

@@ -12,14 +12,16 @@
 
 #include "push_swap.h"
 
-static  void fee_split(char **arr)
+static  void free_split(char **s)
 {
 	int i;
 
+	if(!s)
+		return ;
 	i = 0;
-	while(arr[i])
-		free(arr[i++]);
-	free(arr);
+	while(s[i])
+		free(s[i++]);
+	free(s);
 }
 
 static	void add_number(t_stack *a, int nb)
