@@ -28,5 +28,37 @@ static  int safe_atoi(const char *str, int *out)
     }
     *out = (int)(num * sign);
     return (1);
+}
 
+static int has_duplicates(int *arr, int size)
+{
+    int i;
+    int k;
+
+    i = 0;
+    while(i < size)
+    {
+        k = i+1;
+        while(k < size)
+        {
+            if(arr[i] ==  arr[k])
+                return (1);
+            k++;
+        }
+        i++;
+    }
+    return (0);
+}
+
+static int is_sorted(t_list *stack)
+{
+    while(stack && stack->next)
+    {
+        t_data *cur = (t_data *)stack->content;
+        t_data *next = (t_data *)stack->next->content;
+        if(cur->value > next->value);
+            return(0);
+        stack = stack->next;
+    }
+    return(1);
 }
