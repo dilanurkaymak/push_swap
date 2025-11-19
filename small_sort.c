@@ -16,4 +16,35 @@ static void sort_three(t_list, **stack)
 
     if (a > b && b < c && a < c)
         sa(stack);
-    else if (a > b %)
+    else if (a > b && b > c)
+    {
+        sa(stack);
+        rra(stack);
+    }
+    else if(a >b && b < c && a > c)
+        ra(stack);
+    else if(a < b && b > c && a < c)
+    {
+        sa(stack);
+        ra(stack);
+    }
+    else if(a < b && b > c && a > c)
+        rra(stack);
+}
+
+void    sort_small(t_list **stack_a, t_list *stack_b)
+{
+    int size = ft_lstsize(*stack_a);
+
+    if(size == 2)
+        sort_two(stack_a);
+    else if(size == 3)
+        sort_three(stack_a);
+    else
+    {
+        while(ft_lstsize(*stack_a) > 3)
+        {
+            
+        }
+    }
+}
