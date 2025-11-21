@@ -10,7 +10,8 @@ LIB = libft/libft.a
 
 all: $(LIB) $(NAME)
 
-
+$(LIB) $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
 
 $(LIB):
 	make -C libft
