@@ -20,9 +20,7 @@ clean:
 	rm -rf $(OBJS)
 	make -C libft clean
 
-fclean: clean
-	rm -f $(NAME)
-	make -C libft fclean
+
 
 re: fclean all
 
