@@ -16,7 +16,9 @@ $(LIB) $(NAME)
 $(LIB):
 	make -C libft
 
-
+clean:
+	rm -rf $(OBJS)
+	make -C libft clean
 
 fclean: clean
 	rm -f $(NAME)
