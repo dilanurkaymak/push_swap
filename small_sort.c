@@ -1,72 +1,106 @@
 #include "push_swap.h"
 
-static void sort_two(t_list **stack)
+static int  get_min_pos(t_list *stk)
 {
-    t_data  *first = (t_data *)(*stack)->content;
-    t_data  *second = (t_data *)(*stack)->next->content;
+    int min_val;
+    int min_pos;
+    int i;
+
+    if(!stk)
+        return (-1);
+
+    min_val = ((t_data *)stk->content)->value;
+    min_pos = 0;
+    i = 0;
+
+    while (stk)
+    {
+        t_data *data = (t_data *)stk->content;
+        if(data->value < min_val)
+        {
+            min_val = data->value;
+            min_pos = i;
+        }
+        stk = stk->next;
+        i++;
+    }
+    return (min_pos);
+}
+
+static void sort_two(t_list **stk)
+{
+    t_data  *first = (t_data *)(*stk)->content;
+    t_data  *second = (t_data *)(*stk)->next->content;
     if(first->value > second->value)
-        sa(stack);
+        sa(stk);
 }
 
-static void sort_three(t_list, **stack)
+static void sort_three(t_list, **stk)
 {
-    int a = ((t_data *)(*stack)->content)->value;
-    int b = ((t_data *)(*stack)->next->content)->value;
-    int c = ((t_data *)(*stack)->next->next->content)->value;
+    int first;
+    int second;
+    int third;
 
-    if (a > b && b < c && a < c)
-        sa(stack);
-    else if (a > b && b > c)
+    first = ((t_data *)(*stk)->content)->value;
+    second = ((t_data *)(*stk)->next->content)->value;
+    third = ((t_data *)(*stk)->next->next->content)->value;
+    if (first > second && second < third && first < third)
+        sa(stk);
+    else if (first > second && second > third)
     {
-        sa(stack);
-        rra(stack);
+        sa(stk);
+        rra(stk);
     }
-    else if(a >b && b < c && a > c)
-        ra(stack);
-    else if(a < b && b > c && a < c)
+    else if(first >second && second < third && first > third)
+        ra(stk);
+    else if(first < second && second > third && first < third)
     {
-        sa(stack);
-        ra(stack);
+        sa(stk);
+        ra(stk);
     }
-    else if(a < b && b > c && a > c)
-        rra(stack);
+    else if(first < second && second > third && first > third)
+        rra(stk);
 }
 
-void    sort_small(t_list **stack_a, t_list *stack_b)
+void    sort_small(t_list **stk_a, t_list *stk_b)
 {
-    int size = ft_lstsize(*stack_a);
+    int size;
+    int min_pos;
 
+    size = ft_lstsize(*stk_a);
+    if(size <= 1)
+        return ;
     if(size == 2)
-        sort_two(stack_a);
+        sort_two(stk_a);
     else if(size == 3)
-        sort_three(stack_a);
+        sort_three(stk_a);
     else
     {
-        while(ft_lstsize(*stack_a) > 3)
+        while(ft_lstsize(*stk_a) > 3)
         {
-            t_list *cur = *stack_a;
-            t_data *data = (t_data *)cur->content;
-            t_data *min_data = data;
-            t_list *min_code = cur;
-
-
-            while (cur)
+            min_pos = get_min_pos(*stk_a);
+            size = ft_lstsize(*stk_a);
+            
+            if (min_pos > size / 2)
             {
-                t_data *tmp = (t_daata *)cur->content;
-                if(tmp->value < min__data->value)
+                while (min_pos < size)
                 {
-                    min_data = tmp;
-                    min_node = cur;
+                    rra(stk_a);
+                    min_pos++;
                 }
-                cur = cur->next;
             }
-            //en küçük node başa gelicek ve pb
-            while (*stack_a != min_node)
-                ra(stack_a);
-            pb(stack_a, stack_b);
+            else
+            {
+                while(min_pos > 0)
+                {
+                    ra(stk_a);
+                    min_pos--;
+                }
+            }
+            pb(stk_a, stk_b);
         }
-        sort_three(stack_a);
-        while (*stack_b)
-            pa(stack_a, stack_b);
+        sort_three(stk_a);
+        while (*stk_b)
+            pa(stk_a, stk_b);
     }
 }
