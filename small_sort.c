@@ -35,7 +35,7 @@ static void sort_two(t_list **stk)
         sa(stk);
 }
 
-static void sort_three(t_list, **stk)
+static void sort_three(t_list **stk)
 {
     int first;
     int second;
@@ -62,7 +62,7 @@ static void sort_three(t_list, **stk)
         rra(stk);
 }
 
-void    sort_small(t_list **stk_a, t_list *stk_b)
+void    sort_small(t_list **stk_a, t_list **stk_b)
 {
     int size;
     int min_pos;
@@ -83,20 +83,17 @@ void    sort_small(t_list **stk_a, t_list *stk_b)
             
             if (min_pos > size / 2)
             {
-                while (min_pos < size)
-                {
+                int moves = size - min_pos;
+                while(moves--)
                     rra(stk_a);
-                    min_pos++;
-                }
             }
             else
             {
-                while(min_pos > 0)
-                {
+                int moves = min_pos;
+                while(moves--)
                     ra(stk_a);
-                    min_pos--;
-                }
             }
+
             pb(stk_a, stk_b);
         }
         sort_three(stk_a);

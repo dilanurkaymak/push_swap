@@ -13,7 +13,6 @@ typedef struct s_data
 }	t_data;
 
 t_list	*parse_args(int argc, char **argv);
-void	ft_split(char **tokens);
 
 t_list	*create_node(int value);
 void	append_value(t_list **stk, int value);
