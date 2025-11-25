@@ -44,7 +44,29 @@ void    sort_small(t_list **stack_a, t_list *stack_b)
     {
         while(ft_lstsize(*stack_a) > 3)
         {
-            
+            t_list *cur = *stack_a;
+            t_data *data = (t_data *)cur->content;
+            t_data *min_data = data;
+            t_list *min_code = cur;
+
+
+            while (cur)
+            {
+                t_data *tmp = (t_daata *)cur->content;
+                if(tmp->value < min__data->value)
+                {
+                    min_data = tmp;
+                    min_node = cur;
+                }
+                cur = cur->next;
+            }
+            //en küçük node başa gelicek ve pb
+            while (*stack_a != min_node)
+                ra(stack_a);
+            pb(stack_a, stack_b);
         }
+        sort_three(stack_a);
+        while (*stack_b)
+            pa(stack_a, stack_b);
     }
 }

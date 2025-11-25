@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dkaymak <dkaymak@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 22:11:22 by dkaymak          #+#    #+#              */
-/*   Updated: 2025/11/04 22:11:22 by dkaymak        ###   ########.fr         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -21,24 +9,26 @@
 typedef struct s_data
 {
 	int				value;
-	int				index;
+	int				rank;
 }	t_data;
 
 t_list	*parse_args(int argc, char **argv);
+void	ft_split(char **tokens);
 
-int		is_sorted(t_list *stack);
-int		has_duplicates(int *arr, int size);
-int		get_max_bits(t_list *stack);
+t_list	*create_node(int value);
+void	append_value(t_list **stk, int value);
+void	free_stack(t_list **stk);
 
-void	sa(t_list **a);
+void	sa(t_list **stk);
 void	pb(t_list **a, t_list **b);
 void	pa(t_list **a, t_list **b);
-void	ra(t_list **a);
-void	rra(t_list **a);
+void	ra(t_list **stk);
+void	rra(t_list **stk);
 
-void	sort_small(t_list **a, t_list **b);
+void	set_rank(t_list *stk);
+int		max_bits(t_list *stk);
+void	radix_sort(t_list **stk_a, t_list **stk_b);
 
-void	assign_index(t_list *a);
-void	radix_sort(t_list **a, t_list **b);
+void	sort_small(t_list **stk_a, t_list **stk_b);
 
 #endif
