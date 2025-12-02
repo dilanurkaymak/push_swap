@@ -31,7 +31,7 @@ int main(int argc, char **argv)
     if (!is_sorted(stk_a))
     {
         if(ft_lstsize(stk_a) <= 7)
-            sort_small(&stk_a, &stk_a);
+            sort_small(&stk_a, &stk_b);
         else
         {
             set_rank(stk_a);

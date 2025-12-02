@@ -5,22 +5,18 @@ CFLAGS = -Wall -Wextra -Werror -Ilibft
 SRC = main.c parse.c list_ops.c operations.c small_sort.c index.c radix_sort.c
 OBJS = $(SRC:.c=.o)
 
-LIB = libft/libft.a
+LIBFT = libft/libft.a
 
-all: $(LIB) $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJS) $(LIB)
-	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
-%.o: %.c push_swap.h
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(LIB):
+$(LIBFT):
 	make -C libft
 
 clean:
 	rm -f $(OBJS)
-	make -C libft clean
 
 fclean: clean
 	rm -f $(NAME)

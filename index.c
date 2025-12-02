@@ -41,7 +41,6 @@ void 	set_rank(t_list *stk)
 int max_bits(t_list *stk)
 {
 	int max_rank;
-	// KRİTİK DÜZELTME: curr değişkeni stk ile başlatıldı.
 	t_list 	*curr = stk; 
 	int bit_count;
 
