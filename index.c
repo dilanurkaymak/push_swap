@@ -1,33 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   index.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkaymak <dkaymak@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/02 16:47:13 by dkaymak           #+#    #+#             */
+/*   Updated: 2025/12/02 16:48:43 by dkaymak          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void 	set_rank(t_list *stk)
+t_data	**ft_prepare_arr(t_list *stk, int count)
 {
-	int count;
-	t_list 	*curr;
-	t_data 	**arr;
-	int 	outer;
-	int 	inner;
+	t_data	**arr;
+	t_list	*curr;
+	int		i;
 
-	count =ft_lstsize(stk);
-	if (count == 0)
-		return ;
-	arr = malloc(sizeof(t_data *) * count);
+	arr = (t_data **)malloc(sizeof(t_data *) * count);
 	if (!arr)
-		return;
+		return (NULL);
 	curr = stk;
-	outer = 0;
+	i = 0;
 	while (curr)
 	{
-		arr[outer] = (t_data *)curr->content;
-		arr[outer]->rank = 0;
+		arr[i] = (t_data *)curr->content;
+		arr[i]->rank = 0;
 		curr = curr->next;
-		outer++;
+		i++;
 	}
+	return (arr);
+}
+
+void	ft_calculate_ranks(t_data **arr, int count)
+{
+	int	outer;
+	int	inner;
+
 	outer = 0;
 	while (outer < count)
 	{
 		inner = 0;
-		while(inner < count)
+		while (inner < count)
 		{
 			if (arr[outer]->value > arr[inner]->value)
 				arr[outer]->rank++;
@@ -35,25 +50,19 @@ void 	set_rank(t_list *stk)
 		}
 		outer++;
 	}
-	free(arr);
 }
 
-int max_bits(t_list *stk)
+void	set_rank(t_list *stk)
 {
-	int max_rank;
-	t_list 	*curr = stk; 
-	int bit_count;
+	int		count;
+	t_data	**arr;
 
-	max_rank = 0;
-	while (curr)
-	{
-		t_data *data = (t_data *)curr->content;
-		if (data->rank > max_rank)
-			max_rank = data->rank;
-		curr = curr->next;
-	}
-	bit_count = 0;
-	while ((max_rank >> bit_count) != 0)
-		bit_count++;
-	return (bit_count);
+	count = ft_lstsize(stk);
+	if (count == 0)
+		return ;
+	arr = ft_prepare_arr(stk, count);
+	if (!arr)
+		return ;
+	ft_calculate_ranks(arr, count);
+	free(arr);
 }

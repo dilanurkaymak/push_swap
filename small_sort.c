@@ -1,48 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   small_sort.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkaymak <dkaymak@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/02 17:36:15 by dkaymak           #+#    #+#             */
+/*   Updated: 2025/12/02 17:36:16 by dkaymak          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-static void sort_two(t_list **stk)
-{
-	t_data	*top_node;
-	t_data	*mid_node;
-
-	if (!stk || !*stk || !(*stk)->next)
-		return ;
-	top_node = (*stk)->content;
-	mid_node = (*stk)->next->content;
-	if (top_node->value > mid_node->value)
-		sa(stk);
-}
-
-static void sort_three(t_list **stk)
-{
-	t_data	*top_node;
-	t_data	*mid_node;
-	t_data	*bot_node;
-
-	if (!stk || !*stk || ft_lstsize(*stk) < 3)
-		return ;
-	top_node = (*stk)->content;
-	mid_node = (*stk)->next->content;
-	bot_node = (*stk)->next->next->content;
-	if (top_node->value > mid_node->value && mid_node->value < bot_node->value && top_node->value < bot_node->value)
-		sa(stk);
-	else if (top_node->value > mid_node->value && mid_node->value > bot_node->value)
-	{
-		sa(stk);
-		rra(stk);
-	}
-	else if (top_node->value > mid_node->value && mid_node->value < bot_node->value && top_node->value > bot_node->value)
-		ra(stk);
-	else if (top_node->value < mid_node->value && mid_node->value > bot_node->value && top_node->value < bot_node->value)
-	{
-		sa(stk);
-		ra(stk);
-	}
-	else if (top_node->value < mid_node->value && mid_node->value > bot_node->value && top_node->value > bot_node->value)
-		rra(stk);
-}
-
-static int get_min_pos(t_list *stk)
+static int	get_min_pos(t_list *stk)
 {
 	t_data	*node;
 	int		min_val;
@@ -51,14 +21,14 @@ static int get_min_pos(t_list *stk)
 
 	if (!stk)
 		return (-1);
-	node = stk->content;
+	node = (t_data *)stk->content;
 	min_val = node->value;
 	min_pos = 0;
 	i = 0;
 	while (stk)
 	{
-		node = stk->content;
-		if (node->value < min_val)
+		node = (t_data *)stk->content;
+		if (node && node->value < min_val)
 		{
 			min_val = node->value;
 			min_pos = i;
@@ -69,7 +39,49 @@ static int get_min_pos(t_list *stk)
 	return (min_pos);
 }
 
-static void push_min_to_b(t_list **a, t_list **b)
+static void	sort_two(t_list **stk)
+{
+	t_data	*top_node;
+	t_data	*mid_node;
+
+	if (!stk || !*stk || !(*stk)->next)
+		return ;
+	top_node = (t_data *)(*stk)->content;
+	mid_node = (t_data *)(*stk)->next->content;
+	if (top_node->value > mid_node->value)
+		sa(stk);
+}
+
+static void	sort_three(t_list **stk)
+{
+	int	top;
+	int	mid;
+	int	bot;
+
+	if (is_sorted(*stk))
+		return ;
+	top = ((t_data *)(*stk)->content)->value;
+	mid = ((t_data *)(*stk)->next->content)->value;
+	bot = ((t_data *)(*stk)->next->next->content)->value;
+	if (top > mid && mid < bot && top < bot)
+		sa(stk);
+	else if (top > mid && mid > bot)
+	{
+		sa(stk);
+		rra(stk);
+	}
+	else if (top > mid && mid < bot && top > bot)
+		ra(stk);
+	else if (top < mid && mid > bot && top < bot)
+	{
+		sa(stk);
+		ra(stk);
+	}
+	else if (top < mid && mid > bot && top > bot)
+		rra(stk);
+}
+
+static void	push_min_to_b(t_list **a, t_list **b)
 {
 	int	size;
 	int	min_pos;
@@ -91,32 +103,27 @@ static void push_min_to_b(t_list **a, t_list **b)
 	}
 	pb(a, b);
 }
-void sort_small(t_list **stk_a, t_list **stk_b)
+
+void	sort_small(t_list **a, t_list **b)
 {
 	int	size;
 
-	size = ft_lstsize(*stk_a);
+	size = ft_lstsize(*a);
 	if (size <= 1)
 		return ;
 	if (size == 2)
 	{
-		sort_two(stk_a);
+		sort_two(a);
 		return ;
 	}
 	if (size == 3)
 	{
-		sort_three(stk_a);
+		sort_three(a);
 		return ;
 	}
-	while (size > 3)
-	{
-		push_min_to_b(stk_a, stk_b);
-		size--;
-	}
-	sort_three(stk_a);
-	while (*stk_b)
-	{
-		pa(stk_a, stk_b);
-		ra(stk_a);
-	}
+	while (ft_lstsize(*a) > 3)
+		push_min_to_b(a, b);
+	sort_three(a);
+	while (*b)
+		pa(a, b);
 }
